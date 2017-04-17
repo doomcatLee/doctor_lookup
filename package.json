@@ -2,7 +2,6 @@
   "name": "ping-pong",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "directories": {
     "test": "test"
   },
@@ -12,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "bower-files": "^3.14.1",
+    "browser-sync": "^2.18.8",
     "browserify": "^14.3.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
