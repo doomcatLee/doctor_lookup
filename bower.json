@@ -1,0 +1,22 @@
+{
+  "name": "doctor_lookup",
+  "description": "Doctor lookup allows users to find the nearest doctor depending on your health condition",
+  "main": "index.js",
+  "authors": [
+    "Alex Lee"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "^3.2.1",
+    "bootstrap": "^3.3.7"
+  }
+}
