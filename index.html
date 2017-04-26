@@ -1,32 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="build/css/vendor.css">
-    <script src="build/js/vendor.min.js"></script>
-    <script type="text/javascript" src="build/js/app.js"></script>
-    <title>Ping Pong</title>
-  </head>
-  <body>
-     <div class="container">
-       <h3>Well look at the time! </h3>
-       <h3 id="time"></h3>
-       <h1>Ping Pong!</h1>
-       <form id="ping-pong-form">
-         <div class="form-group">
-           <label for="goal">Enter a number:</label>
-           <input id="goal" type="number">
-           <button class="btn-success" type="submit">Submit</button>
-         </div>
-       </form>
-       <form id="signup">
-         <div class="form-group">
-           <label for="email">Enter your email:</label>
-           <input id="email" type="text">
-           <button class="btn-success" type="submit">Submit</button>
-         </div>
-       </form>
-       <ul id="solution"></ul>
-       <a href="weather.html">Click for the weather...</a>
-     </div>
-   </body>
+
+<head>
+  <title>Doctor Finder</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:400,700" rel="stylesheet" />
+  <link href="img/favicon.png" type="image/x-icon" rel="shortcut icon" />
+
+
+  <script src="build/js/vendor.min.js"></script>
+  <script src="build/js/app.js"></script>
+  <link href="css/screen.css" rel="stylesheet" />
+  <link rel="stylesheet" href="build/css/vendor.css">
+</head>
+
+
+<body class="home" id="page">
+
+
+  <!-- Main Content -->
+  <div class="content-box">
+    <!-- Hero Section -->
+    <section class="section section-hero">
+      <div class="hero-box">
+        <div class="container">
+          <div class="hero-text align-center">
+            <h1>Find a doctor</h1>
+            <p>Search doctors near you based on your symptoms</p>
+          </div>
+
+          <form class="destinations-form">
+            <div class="input-line">
+
+              <input id="name" type="text" value="" class="form-input check-value" placeholder="Enter your symptom" />
+              <button id='search' type="button" name="destination-submit" class="form-submit btn btn-special" data-toggle="modal" data-target=".bs-example-modal-lg">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">List of doctors</h4>
+        </div>
+        <!-- MODAL BODY -->
+        <div class="modal-body">
+          <!-- FILLED BY jQUERY -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</body>
+
+
 </html>
