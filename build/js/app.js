@@ -60,12 +60,15 @@ var displayDoctors = function(name, img, specialty, education, address, phone, b
 
 $(function() {
   var doctorObject = new Doctor();
-  $('#search').click(function() {
-    console.log('clicked');
+
+  $('#searchName').click(function() {
     var name = $('#name').val();
     $('#name').val('');
     doctorObject.getDoctors(name, displayDoctors);
   });
+
+
+
 });
 
 (function($) {

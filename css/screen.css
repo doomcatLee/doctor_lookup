@@ -1992,6 +1992,10 @@ hr {
   }
 }
 
+.input-line{
+  margin-top: 30px;
+}
+
 /* ----------------- 3. Base Styling ----------------- */
 @font-face {
   font-family: "icomoon";
@@ -2779,7 +2783,7 @@ textarea:focus {
   background-position: center;
   background-attachment: fixed;
   padding: 200px 0;
-  height: 100vh;
+  height:1000px;
 }
 .hero-box .hero-text h1,
 .hero-box .hero-text p {

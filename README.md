@@ -12,7 +12,7 @@ _Find my doctor is a simple web application that searches through doctors in the
 
 * _Required Tools: npm, bower and gulp_
 * _Required Apis: Better Doctor (https://developer.betterdoctor.com)_
-* _Register and palce your API key into a `.env` file in the root project directory with the following content:
+* _Register and palce your API key into a `.env` file in the root project directory with the following content:_
 
 ```
 exports.apiKey = "YOUR_BETTER_DOCTOR_API_KEY";
