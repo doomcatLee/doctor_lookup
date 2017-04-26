@@ -1,4 +1,115 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+exports.apiKey = "dbcdb6abbda39b97f03f8acc523c31c2";
+
+},{}],2:[function(require,module,exports){
+var apiKey = require('./../.env').apiKey;
+
+Doctor = function() {}
+
+Doctor.prototype.getDoctors = function(query, displayDoctors) {
+  $.get('https://api.betterdoctor.com/2016-03-01/doctors?query=' + query + '&skip=0&limit=10&user_key=' + apiKey).then(function(response) {
+    for (var i = 0; i < response.data.length; i++) {
+      displayDoctors(response.data[i].profile.first_name + ' ' +
+        response.data[i].profile.last_name + ', ' + response.data[0].profile.title,
+        response.data[i].profile.image_url,
+        response.data[i].specialties[0].name,
+        response.data[i].educations[0].school + ', ' + response.data[i].educations[0].degree,
+        response.data[i].practices[0].visit_address.street + ', ' + response.data[i].practices[0].visit_address.city + ', ' + response.data[i].practices[0].visit_address.state,
+        response.data[i].practices[0].phones[0].number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 $3'),
+        response.data[i].profile.bio);
+    }
+  }).fail(function(error) {
+    $('.showWeather').text('error');
+  });
+}
+
+exports.doctorModule = Doctor;
+
+},{"./../.env":1}],3:[function(require,module,exports){
+(function (global){
+global.jQuery = require("jquery");
+var Doctor = require('./../js/doctor.js').doctorModule;
+
+
+
+function buildTemplate(jQuery, name, img, specialty, education, address, phone, bio) {
+  $(jQuery).append(
+    "<div class='list-group'>" +
+    "<div class=row>" +
+    "<div class='col-md-4'>" +
+    "<img src=" + img + "></img>" +
+    "<h3 class='list-group-item-heading'>" + name + '</h3>' +
+    "<h4 class='list-group-item-heading'><i>" + specialty + '</i></h4>' +
+    "<h5 class='list-group-item-heading'>" + education + '</h5>' +
+    "<br>" +
+    "<h5 class='list-group-item-heading'>" + address + '</h5>' +
+    "<h5 class='list-group-item-heading'>" + phone + '</h5>' +
+    "</div>" +
+    "<div class='col-md-8'>" +
+    "<h3> Bio </h3>" +
+    "<p class='list-group-item-text'>" + bio + "</p>" +
+    "</div>" +
+    "</div>" +
+    "</div>");
+}
+
+
+var displayDoctors = function(name, img, specialty, education, address, phone, bio) {
+  buildTemplate('.modal-body', name, img, specialty, education, address, phone, bio);
+};
+
+$(function() {
+  var doctorObject = new Doctor();
+  $('#search').click(function() {
+    console.log('clicked');
+    var name = $('#name').val();
+    $('#name').val('');
+    doctorObject.getDoctors(name, displayDoctors);
+  });
+});
+
+(function($) {
+  $('.btn-default').on('click', function(e) {
+    e.preventDefault();
+    var obj = $(this);
+
+    obj.addClass('active');
+
+    setTimeout(function() {
+      obj.removeClass('active');
+    }, 1500);
+
+    // Load Boats
+    if (obj.hasClass('btn-load-boats')) {
+      if (!$('.load-boats-box').hasClass('open')) {
+        $('.load-boats-box').slideToggle(1000);
+        setTimeout(function() {
+          $('.load-boats-box').addClass('open');
+        }, 700);
+      }
+    }
+
+    // Load Boats
+    if (obj.hasClass('btn-load-destination')) {
+      if (!$('.load-destinations-box').hasClass('open')) {
+        $('.load-destinations-box').slideToggle(1000);
+        setTimeout(function() {
+          $('.load-destinations-box').addClass('open');
+        }, 700);
+      }
+    }
+  });
+
+  // Fade In Page
+  $(document).ready(function() {
+    setTimeout(function() {
+      $('body').addClass('dom-ready');
+    }, 300);
+  });
+})(jQuery);
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./../js/doctor.js":2,"jquery":4}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.1
  * https://jquery.com/
@@ -10253,108 +10364,4 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],2:[function(require,module,exports){
-exports.apiKey = "dbcdb6abbda39b97f03f8acc523c31c2";
-
-},{}],3:[function(require,module,exports){
-var apiKey = require('./../.env').apiKey;
-
-Doctor = function() {}
-
-Doctor.prototype.getDoctors = function(query, displayDoctors) {
-  $.get('https://api.betterdoctor.com/2016-03-01/doctors?query=' + query + '&skip=0&limit=10&user_key=' + apiKey).then(function(response) {
-    for (var i = 0; i < response.data.length; i++) {
-      displayDoctors(response.data[i].profile.first_name + ' ' +
-        response.data[i].profile.last_name + ', ' + response.data[0].profile.title,
-        response.data[i].profile.image_url,
-        response.data[i].specialties[0].name,
-        response.data[i].educations[0].school + ', ' + response.data[i].educations[0].degree,
-        response.data[i].practices[0].visit_address.street + ', ' + response.data[i].practices[0].visit_address.city + ', ' + response.data[i].practices[0].visit_address.state,
-        response.data[i].practices[0].phones[0].number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 $3'),
-        response.data[i].profile.bio);
-    }
-  }).fail(function(error) {
-    $('.showWeather').text('error');
-  });
-}
-
-exports.doctorModule = Doctor;
-
-},{"./../.env":2}],4:[function(require,module,exports){
-(function (global){
-global.jQuery = require("jquery");
-var Doctor = require('./../js/doctor.js').doctorModule;
-
-
-
-function buildTemplate(jQuery, name, img, specialty, education, address, phone, bio) {
-  $(jQuery).prepend(
-    "<div class='list-group'>" +
-    "<a class='list-group-item'>" +
-    "<img src=" + img + "></img>" +
-    "<h4 class='list-group-item-heading'>" + name + '</h4>' +
-    "<h4 class='list-group-item-heading'>" + specialty + '</h4>' +
-    "<h4 class='list-group-item-heading'>" + education + '</h4>' +
-    "<h4 class='list-group-item-heading'>" + address + '</h4>' +
-    "<h4 class='list-group-item-heading'>" + phone + '</h4>' +
-    "<p class='list-group-item-text'>" + bio + "</p>" +
-    "</a>" +
-    "</div>");
-}
-
-var displayDoctors = function(name, img, specialty, education, address, phone, bio) {
-  buildTemplate('.modal-body', name, img, specialty, education, address, phone, bio);
-};
-
-$(function() {
-  var doctorObject = new Doctor();
-  $('#search').click(function() {
-    console.log('clicked');
-    var name = $('#name').val();
-    $('#name').val('');
-    doctorObject.getDoctors(name, displayDoctors);
-  });
-});
-
-(function($) {
-  $('.btn-default').on('click', function(e) {
-    e.preventDefault();
-    var obj = $(this);
-
-    obj.addClass('active');
-
-    setTimeout(function() {
-      obj.removeClass('active');
-    }, 1500);
-
-    // Load Boats
-    if (obj.hasClass('btn-load-boats')) {
-      if (!$('.load-boats-box').hasClass('open')) {
-        $('.load-boats-box').slideToggle(1000);
-        setTimeout(function() {
-          $('.load-boats-box').addClass('open');
-        }, 700);
-      }
-    }
-
-    // Load Boats
-    if (obj.hasClass('btn-load-destination')) {
-      if (!$('.load-destinations-box').hasClass('open')) {
-        $('.load-destinations-box').slideToggle(1000);
-        setTimeout(function() {
-          $('.load-destinations-box').addClass('open');
-        }, 700);
-      }
-    }
-  });
-
-  // Fade In Page
-  $(document).ready(function() {
-    setTimeout(function() {
-      $('body').addClass('dom-ready');
-    }, 300);
-  });
-})(jQuery);
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./../js/doctor.js":3,"jquery":1}]},{},[4]);
+},{}]},{},[3]);
